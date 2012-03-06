@@ -59,6 +59,17 @@ TRIBITS_TPL_DECLARE_LIBRARIES( Boost
   REQUIRED_HEADERS boost/version.hpp boost/mpl/at.hpp
   )
 
+find_package (Boost REQUIRED)
+if (Boost_FOUND)
+    set (HAVE_BOOST_VERSION ${Boost_VERSION})
+    if (Boost_MINOR_VERSION GREATER 39)
+        set (HAVE_BOOST_GT_1_39 TRUE)
+    endif(Boost_MINOR_VERSION GREATER 39)
+    if (Boost_MINOR_VERSION GREATER 40)
+        set (HAVE_BOOST_SPIRIT_QI TRUE)
+    endif(Boost_MINOR_VERSION GREATER 40)
+endif()
+
 # This broke trilinos configuration:
 #  REQUIRED_LIBS_NAMES "program_options"
 
