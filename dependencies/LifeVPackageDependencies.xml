@@ -14,4 +14,19 @@
     </EmailAddresses>
     <ParentPackage value=""/>
   </Package>
+  <Package name="Level_Set" dir="lifev/level_set" type="PS">
+    <LIB_REQUIRED_DEP_PACKAGES value="Core"/>
+    <LIB_OPTIONAL_DEP_PACKAGES/>
+    <TEST_REQUIRED_DEP_PACKAGES/>
+    <TEST_OPTIONAL_DEP_PACKAGES/>
+    <LIB_REQUIRED_DEP_TPLS value="BLAS,LAPACK,Trilinos,ParMETIS,Boost,MPI"/>
+    <LIB_OPTIONAL_DEP_TPLS value="QHull"/>
+    <TEST_REQUIRED_DEP_TPLS/>
+    <TEST_OPTIONAL_DEP_TPLS/>
+    <EmailAddresses>
+      <Checkin address="level_set-checkins@software.sandia.gov"/>
+      <Regression address="level_set-regression@software.sandia.gov"/>
+    </EmailAddresses>
+    <ParentPackage value=""/>
+  </Package>
 </PackageDependencies>
