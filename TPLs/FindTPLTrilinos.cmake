@@ -1,9 +1,9 @@
 INCLUDE(TribitsTplDeclareLibraries)
 
-TRIBITS_TPL_DECLARE_LIBRARIES( Trilinos
-  REQUIRED_HEADERS Epetra_Comm.h
-  REQUIRED_LIBS_NAMES "epetra"
-  )
+# TRIBITS_TPL_DECLARE_LIBRARIES( Trilinos
+#   REQUIRED_HEADERS Epetra_Comm.h
+#   REQUIRED_LIBS_NAMES "epetra"
+#   )
 
 if(Trilinos_LIBRARY_DIRS)
     set (Trilinos_DIR ${Trilinos_DIR} "${Trilinos_LIBRARY_DIRS}/cmake/Trilinos")
@@ -90,4 +90,5 @@ endforeach (TPL)
 
 # Filling variables needed by the TriBITS system
 set (TPL_Trilinos_INCLUDE_DIRS ${LifeV_Trilinos_INCLUDE_DIRS})
+set (TPL_Trilinos_LIBRARY_DIRS ${Trilinos_LIBRARY_DIRS})
 set (TPL_Trilinos_LIBRARIES ${LifeV_Trilinos_LIBS})
