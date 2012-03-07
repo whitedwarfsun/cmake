@@ -28,14 +28,13 @@ SET(CMAKE_CXX_COMPILER ${Trilinos_CXX_COMPILER} )
 SET(CMAKE_C_COMPILER ${Trilinos_C_COMPILER} )
 SET(CMAKE_Fortran_COMPILER ${Trilinos_Fortran_COMPILER} )
 
-# Required packages (to be moved outside, like REQUIRED COMPONENTS ...)
-list (APPEND LifeV_REQUIRED_Trilinos_PKGS
-  "Epetra" "EpetraExt" "Amesos" "Anasazi" "AztecOO" "Belos"
-  "Ifpack" "ML" "Teuchos" "Zoltan")
-
 # Optional Packages (to be moved outside with COMPONENTS ...)
 list (APPEND LifeV_OPTIONAL_Trilinos_PKGS
   "NOX" "Thyra" "Rythmos")
+
+# Required packages (to be moved outside, like REQUIRED COMPONENTS ...)
+list (APPEND LifeV_REQUIRED_Trilinos_PKGS
+  "ML" "Ifpack" "Amesos" "Anasazi" "Belos" "AztecOO" "Zoltan" "EpetraExt" "Epetra" "Teuchos")
 
 # Start scanning Trilinos configuration
 foreach (TYPE IN ITEMS "REQUIRED" "OPTIONAL")
