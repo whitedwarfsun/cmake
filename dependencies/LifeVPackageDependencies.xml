@@ -1,0 +1,17 @@
+<PackageDependencies project="LifeV">
+  <Package name="Core" dir="lifev/core" type="PS">
+    <LIB_REQUIRED_DEP_PACKAGES/>
+    <LIB_OPTIONAL_DEP_PACKAGES/>
+    <TEST_REQUIRED_DEP_PACKAGES/>
+    <TEST_OPTIONAL_DEP_PACKAGES/>
+    <LIB_REQUIRED_DEP_TPLS value="BLAS,LAPACK,Trilinos,ParMETIS,Boost,MPI"/>
+    <LIB_OPTIONAL_DEP_TPLS value="QHull"/>
+    <TEST_REQUIRED_DEP_TPLS/>
+    <TEST_OPTIONAL_DEP_TPLS/>
+    <EmailAddresses>
+      <Checkin address="core-checkins@software.sandia.gov"/>
+      <Regression address="core-regression@software.sandia.gov"/>
+    </EmailAddresses>
+    <ParentPackage value=""/>
+  </Package>
+</PackageDependencies>

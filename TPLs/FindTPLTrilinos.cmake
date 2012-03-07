@@ -1,13 +1,21 @@
-if (NOT Trilinos_DIR)
-  if (NOT Trilinos_ROOT)
-    set (Trilinos_DIR "/usr/lib/cmake/Trilinos")
-  else ()
-    set (Trilinos_DIR "${Trilinos_ROOT}/lib/cmake/Trilinos")
-  endif ()
-endif ()
+INCLUDE(TribitsTplDeclareLibraries)
+
+TRIBITS_TPL_DECLARE_LIBRARIES( Trilinos
+  REQUIRED_HEADERS Epetra_Comm.h
+  REQUIRED_LIBS_NAMES "epetra"
+  )
+
+if(Trilinos_LIBRARY_DIRS)
+    set (Trilinos_DIR ${Trilinos_DIR} "${Trilinos_LIBRARY_DIRS}/cmake/Trilinos")
+endif()
+if (Trilinos_INCLUDE_DIRS)
+    set (Trilinos_DIR ${Trilinos_DIR} ${Trilinos_INCLUDE_DIRS})
+endif()
+
+MESSAGE("Trilinos_DIR: " ${Trilinos_DIR})
 
 # Here I am looking for TrilinosConfig.cmake and I will import it. 
-find_package (Trilinos QUIET NO_MODULE)
+find_package (Trilinos NO_MODULE PATHS ${Trilinos_DIR})
 
 # Stop cmake if Trilinos is not found.
 if (NOT Trilinos_FOUND)

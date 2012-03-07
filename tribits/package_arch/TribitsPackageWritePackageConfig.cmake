@@ -191,6 +191,7 @@ FUNCTION(TRIBITS_WRITE_PACKAGE_CONFIG_FILE PACKAGE_NAME)
 
   # Reverse the order of the package list, letting us loop 
   # from most-dependent to least-dependent. 
+  MESSAGE("Package list is:" ${PACKAGE_LIST})
   LIST(REVERSE PACKAGE_LIST)
 
   # Now that we have a reduced set of packages check each one to see if A. PACKAGE_NAME actually
