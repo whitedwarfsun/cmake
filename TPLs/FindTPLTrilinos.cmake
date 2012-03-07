@@ -1,30 +1,86 @@
-# @HEADER
-# *******************************************************************************
-# 
-#     Copyright (C) 2004, 2005, 2007 EPFL, Politecnico di Milano, INRIA
-#     Copyright (C) 2010 EPFL, Politecnico di Milano, Emory University
-# 
-#     This file is part of LifeV.
-# 
-#     LifeV is free software; you can redistribute it and/or modify
-#     it under the terms of the GNU Lesser General Public License as published by
-#     the Free Software Foundation, either version 3 of the License, or
-#     (at your option) any later version.
-# 
-#     LifeV is distributed in the hope that it will be useful,
-#     but WITHOUT ANY WARRANTY; without even the implied warranty of
-#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#     Lesser General Public License for more details.
-# 
-#     You should have received a copy of the GNU Lesser General Public License
-#     along with LifeV.  If not, see <http://www.gnu.org/licenses/>.
-#
-# *******************************************************************************
-# @HEADER
+if (NOT Trilinos_DIR)
+  if (NOT Trilinos_ROOT)
+    set (Trilinos_DIR "/usr/lib/cmake/Trilinos")
+  else ()
+    set (Trilinos_DIR "${Trilinos_ROOT}/lib/cmake/Trilinos")
+  endif ()
+endif ()
 
-INCLUDE(TribitsTplDeclareLibraries)
+# Here I am looking for TrilinosConfig.cmake and I will import it. 
+find_package (Trilinos QUIET NO_MODULE)
 
-TRIBITS_TPL_DECLARE_LIBRARIES( Trilinos
-  REQUIRED_HEADERS Epetra_Comm.h
-  REQUIRED_LIBS_NAMES "epetra;epetraext;amesos;anasazi;aztecoo;belos;ifpack;ml;teuchos;zoltan;nox;rythmos;thyracore;thyraepetra;thyraepetraext"
-  )
+# Stop cmake if Trilinos is not found.
+if (NOT Trilinos_FOUND)
+  message (FATAL_ERROR "Could not find Trilinos!")
+endif ()
+
+# Here it will be better just to raise a warning or have if(USE_TRILINOS_COMPILERS)
+# Make sure to use same compilers and flags as Trilinos
+SET(CMAKE_CXX_COMPILER ${Trilinos_CXX_COMPILER} )
+SET(CMAKE_C_COMPILER ${Trilinos_C_COMPILER} )
+SET(CMAKE_Fortran_COMPILER ${Trilinos_Fortran_COMPILER} )
+
+# Required packages (to be moved outside, like REQUIRED COMPONENTS ...)
+list (APPEND LifeV_REQUIRED_Trilinos_PKGS
+  "Epetra" "EpetraExt" "Amesos" "Anasazi" "AztecOO" "Belos"
+  "Ifpack" "ML" "Teuchos" "Zoltan")
+
+# Optional Packages (to be moved outside with COMPONENTS ...)
+list (APPEND LifeV_OPTIONAL_Trilinos_PKGS
+  "NOX" "Thyra" "Rythmos")
+
+# Start scanning Trilinos configuration
+foreach (TYPE IN ITEMS "REQUIRED" "OPTIONAL")
+  foreach (PKG IN LISTS LifeV_${TYPE}_Trilinos_PKGS)
+    # Look for PKG
+    list (FIND Trilinos_PACKAGE_LIST "${PKG}" PKG_FOUND)
+    if (PKG_FOUND GREATER -1)
+      # Found! Let's announce it!
+      message ("-- Trilinos :: ${PKG} Found!")
+      list (APPEND LifeV_Trilinos_LIBRARIES "${${PKG}_LIBRARIES}")
+      list (APPEND LifeV_Trilinos_TPL_LIBRARIES "${${PKG}_TPL_LIBRARIES}")
+      list (APPEND LifeV_Trilinos_TPL_INCLUDE_DIRS "${${PKG}_TPL_INCLUDE_DIRS}")
+      list (APPEND LifeV_Trilinos_TPL_LIST "${${PKG}_TPL_LIST}")
+      string (TOUPPER ${PKG} UPKG)
+      set (${UPKG}_FOUND True)
+      set (HAVE_TRILINOS_${UPKG} True)
+    else ()
+      if (TYPE STREQUAL "REQUIRED")
+        message (FATAL_ERROR "-- Trilinos :: ${PKG} NOT Found!")
+      else ()
+        message (WARNING "-- Trilinos :: ${PKG} NOT Found! Some test might not compile properly ...")
+      endif ()
+    endif ()
+  endforeach (PKG)
+endforeach (TYPE)
+
+# Cleaning duplicates
+list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_LIST)
+list (REMOVE_DUPLICATES LifeV_Trilinos_LIBRARIES)
+list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_LIBRARIES)
+list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_INCLUDE_DIRS)
+
+list (APPEND LifeV_Trilinos_INCLUDE_DIRS
+  ${Trilinos_INCLUDE_DIRS}
+  ${LifeV_Trilinos_TPL_INCLUDE_DIRS})
+# I think there's a better way to handle this ... CMake
+# should take care of -L or -l or -rpath ...
+set (LifeV_Trilinos_LIBS "-L${Trilinos_LIBRARY_DIRS}")
+foreach (LIB IN LISTS LifeV_Trilinos_LIBRARIES)
+  set (LifeV_Trilinos_LIBS "${LifeV_Trilinos_LIBS} -l${LIB}")
+endforeach (LIB)
+set (LifeV_Trilinos_LIBS ${LifeV_Trilinos_LIBS} ${LifeV_Trilinos_TPL_LIBRARIES})
+
+# TPLs
+foreach (TPL IN ITEMS 
+  "ParMETIS" "UMFPACK" "SuperLU" "SuperLUDist" "LAPACK" "BLAS" "HDF5")
+  list (FIND LifeV_Trilinos_TPL_LIST "ParMETIS" TPL_FOUND)
+  if (TPL_FOUND GREATER -1)
+    string (TOUPPER ${TPL} UTPL)
+    set (${UTPL}_IS_IN_TRILINOS True)
+  endif()
+endforeach (TPL)
+
+# Filling variables needed by the TriBITS system
+set (TPL_Trilinos_INCLUDE_DIRS ${LifeV_Trilinos_INCLUDE_DIRS})
+set (TPL_Trilinos_LIBRARIES ${LifeV_Trilinos_LIBS})
