@@ -10,4 +10,10 @@
       <Email address="level_set-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
+  <SubProject name="Darcy">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="darcy-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
 </Project>
