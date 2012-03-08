@@ -16,4 +16,10 @@
       <Email address="darcy-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
+  <SubProject name="One_D_Hyperbolic">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="one_d_hyperbolic-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
 </Project>
