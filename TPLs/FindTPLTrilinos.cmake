@@ -80,7 +80,7 @@ set (LifeV_Trilinos_LIBS ${LifeV_Trilinos_LIBS} ${LifeV_Trilinos_TPL_LIBRARIES})
 
 # TPLs
 foreach (TPL IN ITEMS 
-  "ParMETIS" "UMFPACK" "SuperLU" "SuperLUDist" "LAPACK" "BLAS" "HDF5")
+  "Boost" "ParMETIS" "UMFPACK" "SuperLU" "SuperLUDist" "LAPACK" "BLAS" "HDF5")
   list (FIND LifeV_Trilinos_TPL_LIST "ParMETIS" TPL_FOUND)
   if (TPL_FOUND GREATER -1)
     string (TOUPPER ${TPL} UTPL)
