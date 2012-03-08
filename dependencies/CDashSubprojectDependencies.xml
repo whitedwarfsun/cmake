@@ -34,4 +34,10 @@
       <Email address="structure-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
+  <SubProject name="Heart">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="heart-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
 </Project>
