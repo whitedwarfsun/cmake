@@ -59,6 +59,8 @@ TRIBITS_TPL_DECLARE_LIBRARIES( Boost
   REQUIRED_HEADERS boost/version.hpp boost/mpl/at.hpp
   )
 
+set(BOOST_INCLUDEDIR ${TPL_Boost_INCLUDE_DIRS})
+
 find_package (Boost REQUIRED)
 if (Boost_FOUND)
     set (HAVE_BOOST_VERSION ${Boost_VERSION})
