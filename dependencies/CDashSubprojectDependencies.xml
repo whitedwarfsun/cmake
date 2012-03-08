@@ -10,16 +10,28 @@
       <Email address="level_set-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
+  <SubProject name="One_D_Hyperbolic">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="one_d_hyperbolic-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
   <SubProject name="Darcy">
     <Dependency name="Core" type="LR"/>
     <EmailAddresses>
       <Email address="darcy-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
-  <SubProject name="One_D_Hyperbolic">
+  <SubProject name="Navier_Stokes">
     <Dependency name="Core" type="LR"/>
     <EmailAddresses>
-      <Email address="one_d_hyperbolic-regression@software.sandia.gov"/>
+      <Email address="navier_stokes-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
+  <SubProject name="Structure">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="structure-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
 </Project>

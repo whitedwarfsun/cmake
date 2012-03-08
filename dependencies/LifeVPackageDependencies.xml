@@ -29,6 +29,21 @@
     </EmailAddresses>
     <ParentPackage value=""/>
   </Package>
+  <Package name="One_D_Hyperbolic" dir="lifev/one_d_hyperbolic" type="PS">
+    <LIB_REQUIRED_DEP_PACKAGES value="Core"/>
+    <LIB_OPTIONAL_DEP_PACKAGES/>
+    <TEST_REQUIRED_DEP_PACKAGES/>
+    <TEST_OPTIONAL_DEP_PACKAGES/>
+    <LIB_REQUIRED_DEP_TPLS value="BLAS,LAPACK,Trilinos,ParMETIS,Boost,MPI"/>
+    <LIB_OPTIONAL_DEP_TPLS value="QHull"/>
+    <TEST_REQUIRED_DEP_TPLS/>
+    <TEST_OPTIONAL_DEP_TPLS/>
+    <EmailAddresses>
+      <Checkin address="one_d_hyperbolic-checkins@software.sandia.gov"/>
+      <Regression address="one_d_hyperbolic-regression@software.sandia.gov"/>
+    </EmailAddresses>
+    <ParentPackage value=""/>
+  </Package>
   <Package name="Darcy" dir="lifev/darcy" type="PS">
     <LIB_REQUIRED_DEP_PACKAGES value="Core"/>
     <LIB_OPTIONAL_DEP_PACKAGES/>
@@ -44,18 +59,33 @@
     </EmailAddresses>
     <ParentPackage value=""/>
   </Package>
-  <Package name="One_D_Hyperbolic" dir="lifev/one_d_hyperbolic" type="PS">
+  <Package name="Navier_Stokes" dir="lifev/navier_stokes" type="PS">
     <LIB_REQUIRED_DEP_PACKAGES value="Core"/>
     <LIB_OPTIONAL_DEP_PACKAGES/>
     <TEST_REQUIRED_DEP_PACKAGES/>
     <TEST_OPTIONAL_DEP_PACKAGES/>
     <LIB_REQUIRED_DEP_TPLS value="BLAS,LAPACK,Trilinos,ParMETIS,Boost,MPI"/>
-    <LIB_OPTIONAL_DEP_TPLS value="QHull"/>
+    <LIB_OPTIONAL_DEP_TPLS/>
     <TEST_REQUIRED_DEP_TPLS/>
     <TEST_OPTIONAL_DEP_TPLS/>
     <EmailAddresses>
-      <Checkin address="one_d_hyperbolic-checkins@software.sandia.gov"/>
-      <Regression address="one_d_hyperbolic-regression@software.sandia.gov"/>
+      <Checkin address="navier_stokes-checkins@software.sandia.gov"/>
+      <Regression address="navier_stokes-regression@software.sandia.gov"/>
+    </EmailAddresses>
+    <ParentPackage value=""/>
+  </Package>
+  <Package name="Structure" dir="lifev/structure" type="PS">
+    <LIB_REQUIRED_DEP_PACKAGES value="Core"/>
+    <LIB_OPTIONAL_DEP_PACKAGES/>
+    <TEST_REQUIRED_DEP_PACKAGES/>
+    <TEST_OPTIONAL_DEP_PACKAGES/>
+    <LIB_REQUIRED_DEP_TPLS value="BLAS,LAPACK,Trilinos,ParMETIS,Boost,MPI"/>
+    <LIB_OPTIONAL_DEP_TPLS/>
+    <TEST_REQUIRED_DEP_TPLS/>
+    <TEST_OPTIONAL_DEP_TPLS/>
+    <EmailAddresses>
+      <Checkin address="structure-checkins@software.sandia.gov"/>
+      <Regression address="structure-regression@software.sandia.gov"/>
     </EmailAddresses>
     <ParentPackage value=""/>
   </Package>
