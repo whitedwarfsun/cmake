@@ -40,4 +40,16 @@
       <Email address="heart-regression@software.sandia.gov"/>
     </EmailAddresses>
   </SubProject>
+  <SubProject name="Zero_Dimensional">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="zero_dimensional-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
+  <SubProject name="FSI">
+    <Dependency name="Core" type="LR"/>
+    <EmailAddresses>
+      <Email address="fsi-regression@software.sandia.gov"/>
+    </EmailAddresses>
+  </SubProject>
 </Project>
