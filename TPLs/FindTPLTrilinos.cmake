@@ -37,7 +37,7 @@ list (APPEND LifeV_REQUIRED_Trilinos_PKGS
   "ML" "Ifpack" "Amesos" "Anasazi" "Belos" "AztecOO" "Zoltan" "EpetraExt" "Epetra" "Teuchos")
 
 # Start scanning Trilinos configuration
-foreach (TYPE IN ITEMS "REQUIRED" "OPTIONAL")
+foreach (TYPE IN ITEMS "OPTIONAL" "REQUIRED")
   foreach (PKG IN LISTS LifeV_${TYPE}_Trilinos_PKGS)
     # Look for PKG
     list (FIND Trilinos_PACKAGE_LIST "${PKG}" PKG_FOUND)
