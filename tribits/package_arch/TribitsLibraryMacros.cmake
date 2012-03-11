@@ -320,11 +320,12 @@ FUNCTION(TRIBITS_ADD_LIBRARY LIBRARY_NAME)
         COMPONENT ${PACKAGE_NAME}
         )
 
-      INSTALL(
-        FILES ${PARSE_HEADERS}
-        DESTINATION "${${PROJECT_NAME}_INSTALL_INCLUDE_DIR}"
-        COMPONENT ${PACKAGE_NAME}
-        )
+      # installation of headers is handled manually in order to have nested directories
+      #INSTALL(
+      #  FILES ${PARSE_HEADERS}
+      #  DESTINATION "${${PROJECT_NAME}_INSTALL_INCLUDE_DIR}"
+      #  COMPONENT ${PACKAGE_NAME}
+      #  )
 
     ELSE()
 
