@@ -45,7 +45,6 @@ foreach (TYPE IN ITEMS "OPTIONAL" "REQUIRED")
       # Found! Let's announce it!
       message ("-- Trilinos :: ${PKG} Found!")
       list (APPEND LifeV_Trilinos_LIBRARIES "${${PKG}_LIBRARIES}")
-      list (APPEND LifeV_Trilinos_TPL_LIBRARIES "${${PKG}_TPL_LIBRARIES}")
       list (APPEND LifeV_Trilinos_TPL_INCLUDE_DIRS "${${PKG}_TPL_INCLUDE_DIRS}")
       list (APPEND LifeV_Trilinos_TPL_LIST "${${PKG}_TPL_LIST}")
       string (TOUPPER ${PKG} UPKG)
@@ -64,7 +63,8 @@ endforeach (TYPE)
 # Cleaning duplicates
 list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_LIST)
 list (REMOVE_DUPLICATES LifeV_Trilinos_LIBRARIES)
-list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_LIBRARIES)
+set (LifeV_Trilinos_TPL_LIBRARIES ${Trilinos_TPL_LIBRARIES})
+
 list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_INCLUDE_DIRS)
 
 list (APPEND LifeV_Trilinos_INCLUDE_DIRS
