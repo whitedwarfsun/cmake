@@ -74,6 +74,7 @@ INCLUDE(ParseVariableArguments)
 #     [EXEDEPS exeDep1 exeDep2 ...]
 #     [NOEXEPREFIX]
 #     [CATEGORIES <category1>  <category2> ...]
+#     [CREATE_SYMLINK]
 #     )
 #
 #   In this case, the names of the source files and the destination files
@@ -89,6 +90,7 @@ INCLUDE(ParseVariableArguments)
 #     [EXEDEPS exeDep1 exeDep2 ...]
 #     [NOEXEPREFIX]
 #     [CATEGORIES <category1>  <category2> ...]
+#     [CREATE_SYMLINK]
 #     )
 #
 #   In this case, the source files have the same basic name as the
@@ -105,6 +107,7 @@ INCLUDE(ParseVariableArguments)
 #     [EXEDEPS exeDep1 exeDep2 ...]
 #     [NOEXEPREFIX]
 #     [CATEGORIES <category1>  <category2> ...]
+#     [CREATE_SYMLINK]
 #     )
 #
 #   In this case, the source files and destination files have completely
@@ -148,6 +151,8 @@ INCLUDE(ParseVariableArguments)
 #     Option that determines if the prefix '${PACKAGE_NAME}_' will be appended
 #     to the arguments in the EXEDEPS list. 
 #
+#   CREATE_SYMLINK
+#     A symbolic link is created in place of a copied files.
 
 FUNCTION(TRIBITS_COPY_FILES_TO_BINARY_DIR TARGET_NAME)
 
@@ -161,7 +166,7 @@ FUNCTION(TRIBITS_COPY_FILES_TO_BINARY_DIR TARGET_NAME)
     #lists
     "SOURCE_DIR;SOURCE_FILES;SOURCE_PREFIX;DEST_DIR;DEST_FILES;EXEDEPS;TARGETDEPS;CATEGORIES"
     #options
-    "NOEXEPREFIX"
+    "NOEXEPREFIX;CREATE_SYMLINK"
     ${ARGN}
     )
 
@@ -225,6 +230,11 @@ FUNCTION(TRIBITS_COPY_FILES_TO_BINARY_DIR TARGET_NAME)
     MESSAGE(SEND_ERROR "Error, there are not the same number of source files ${PARSE_SOURCE_FILES_LEN} and dest files ${PARSE_DEST_FILES_LEN}!")
   ENDIF()
 
+  SET(EXE_COMMAND "copy")
+  IF (PARSE_CREATE_SYMLINK)
+    SET(EXE_COMMAND "create_symlink")
+  ENDIF()
+
   #
   # C) Build the list of command and dependencies
   #
@@ -247,7 +257,7 @@ FUNCTION(TRIBITS_COPY_FILES_TO_BINARY_DIR TARGET_NAME)
       ADD_CUSTOM_COMMAND(
         OUTPUT ${DEST_FILE_FULL}
         DEPENDS ${SOURCE_FILE_FULL}
-        COMMAND ${CMAKE_COMMAND} ARGS -E copy ${SOURCE_FILE_FULL} ${DEST_FILE_FULL}
+        COMMAND ${CMAKE_COMMAND} ARGS -E ${EXE_COMMAND} ${SOURCE_FILE_FULL} ${DEST_FILE_FULL}
         )
 
       LIST(APPEND DEST_FILES_LIST "${DEST_FILE_FULL}")
@@ -266,7 +276,7 @@ FUNCTION(TRIBITS_COPY_FILES_TO_BINARY_DIR TARGET_NAME)
       ADD_CUSTOM_COMMAND(
         OUTPUT ${DEST_FILE_FULL}
         DEPENDS ${SOURCE_FILE_FULL}
-        COMMAND ${CMAKE_COMMAND} ARGS -E copy ${SOURCE_FILE_FULL} ${DEST_FILE_FULL}
+        COMMAND ${CMAKE_COMMAND} ARGS -E ${EXE_COMMAND} ${SOURCE_FILE_FULL} ${DEST_FILE_FULL}
         )
 
       LIST(APPEND DEST_FILES_LIST "${DEST_FILE_FULL}")
