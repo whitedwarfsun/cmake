@@ -24,9 +24,15 @@ endif ()
 
 # Here it will be better just to raise a warning or have if(USE_TRILINOS_COMPILERS)
 # Make sure to use same compilers and flags as Trilinos
-SET(CMAKE_CXX_COMPILER ${Trilinos_CXX_COMPILER} )
-SET(CMAKE_C_COMPILER ${Trilinos_C_COMPILER} )
-SET(CMAKE_Fortran_COMPILER ${Trilinos_Fortran_COMPILER} )
+IF(NOT ${CMAKE_CXX_COMPILER} EQUAL ${Trilinos_CXX_COMPILER})
+  MESSAGE(WARNING "the selected compiler differs from Trilinos CXX compiler"
+ENDIF()
+IF(NOT ${CMAKE_C_COMPILER} EQUAL ${Trilinos_C_COMPILER})
+  MESSAGE(WARNING "the selected compiler differs from Trilinos C compiler"
+ENDIF()
+IF(NOT ${CMAKE_Fortran_COMPILER} EQUAL ${Trilinos_Fortran_COMPILER})
+  MESSAGE(WARNING "the selected compiler differs from Trilinos Fortran compiler"
+ENDIF()
 
 # Optional Packages (to be moved outside with COMPONENTS ...)
 list (APPEND LifeV_OPTIONAL_Trilinos_PKGS
