@@ -73,8 +73,15 @@ foreach (TYPE IN ITEMS "OPTIONAL" "REQUIRED")
 endforeach (TYPE)
 
 # Cleaning duplicates
+list (REVERSE LifeV_Trilinos_TPL_LIST)
 list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_LIST)
+list (REVERSE LifeV_Trilinos_TPL_LIST)
+list (REVERSE LifeV_Trilinos_LIBRARIES)
 list (REMOVE_DUPLICATES LifeV_Trilinos_LIBRARIES)
+list (REVERSE LifeV_Trilinos_LIBRARIES)
+list (REVERSE Trilinos_TPL_LIBRARIES)
+list (REMOVE_DUPLICATES Trilinos_TPL_LIBRARIES)
+list (REVERSE Trilinos_TPL_LIBRARIES)
 set (LifeV_Trilinos_TPL_LIBRARIES ${Trilinos_TPL_LIBRARIES})
 
 list (REMOVE_DUPLICATES LifeV_Trilinos_TPL_INCLUDE_DIRS)
