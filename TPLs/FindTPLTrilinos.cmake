@@ -24,7 +24,7 @@ endif ()
 
 # Here it will be better just to raise a warning or have if(USE_TRILINOS_COMPILERS)
 # Make sure to use same compilers and flags as Trilinos
-IF(${CMAKE_CXX_COMPILER} STREQUAL ${Trilinos_CXX_COMPILER})
+IF(NOT ${CMAKE_CXX_COMPILER} STREQUAL ${Trilinos_CXX_COMPILER})
   MESSAGE(STATUS "the selected compiler differs from Trilinos CXX compiler")
   MESSAGE(STATUS "CMAKE_CXX_COMPILER:    " ${CMAKE_CXX_COMPILER})
   MESSAGE(STATUS "Trilinos_CXX_COMPILER: " ${Trilinos_CXX_COMPILER})
