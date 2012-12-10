@@ -22,6 +22,13 @@ if (NOT Trilinos_FOUND)
   message (FATAL_ERROR "Could not find Trilinos!")
 endif ()
 
+if("${Trilinos_VERSION_MINOR}" GREATER 6)
+  set (HAVE_TRILINOS_GT_10_6 TRUE)
+  message (STATUS "Using Trilinos > 10.6 " ${Trilinos_VERSION_MINOR})
+else()
+  message (STATUS "Using Trilinos <= 10.6 " ${Trilinos_VERSION_MINOR})
+endif ()
+
 # Here it will be better just to raise a warning or have if(USE_TRILINOS_COMPILERS)
 # Make sure to use same compilers and flags as Trilinos
 IF(NOT ${CMAKE_CXX_COMPILER} STREQUAL ${Trilinos_CXX_COMPILER})
